@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🐔 Chicken Game</title>
+  <style>
+    body {
+      margin: 0; font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(145deg, #0d0d0d, #1a1a1a); color: #fff;
+      text-align: center;
+    }
+    .branding {
+      font-size: 30px; font-weight: bold;
+      margin: 25px 0; color: gold;
+      text-shadow: 0 0 15px #ffcc00;
+    }
+    .levels {
+      margin-bottom: 25px;
+    }
+    .levels button {
+      margin: 5px; padding: 12px 22px;
+      background-color: #333; color: white;
+      border: 1px solid #666; border-radius: 8px;
+      font-size: 18px; box-shadow: 2px 2px 5px #000;
+    }
+    .board {
+      background: radial-gradient(#61370b, #3e2507);
+      padding: 60px 30px; margin: 0 auto;
+      width: 300px; border-radius: 30px;
+      position: relative; box-shadow: inset 0 0 15px #000, 0 0 20px #5a3605;
+    }
+    .chicken {
+      font-size: 70px; margin-top: 40px;
+      text-shadow: 2px 2px 6px #000;
+    }
+    .signal-circle {
+      position: absolute;
+      top: 25px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(to bottom, gold, orange);
+      color: black; padding: 10px 24px;
+      border-radius: 50px; font-weight: bold;
+      font-size: 24px;
+      box-shadow: 0 0 15px gold;
+    }
+    .get-signal {
+      margin-top: 40px;
+    }
+    button.get {
+      padding: 18px 38px; font-size: 20px;
+      background: linear-gradient(to right, #ffd700, #ffa500);
+      color: #000; border: none; border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 0 12px #ffbf00;
+    }
+    .timer {
+      margin-top: 20px; font-size: 16px;
+      color: #ccc;
+    }
+    .msg {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="branding">🔐 CLOWN SOFT</div>
+  <div class="levels">
+    <button>Easy</button>
+    <button>Medium</button>
+    <button>Hard</button>
+    <button>Hardcore</button>
+  </div>
+  <div class="board">
+    <div id="signalBox" class="signal-circle">--</div>
+    <div class="chicken">🍗</div>
+  </div>
+  <div class="get-signal">
+    <button class="get" onclick="generateSignal()">GET SIGNAL</button>
+    <div class="timer" id="timer">10s</div>
+    <div class="msg">🔥 100% Right Signal Powered Bot | Admin: @CLOWNMODS</div>
+  </div>
+
+  <script>
+    const standardSignals = [1.24, 1.68, 2.12, 2.58, 3.14, 3.84, 4.32, 4.96];
+    let lastSignal = null;
+
+    function generateSignal() {
+      let randomIndex = Math.floor(Math.random() * standardSignals.length);
+      let signal = standardSignals[randomIndex];
+
+      // 10% chance to show 5x
+      if (Math.random() < 0.1) {
+        signal = 5.00;
+      }
+
+      // 20% chance to repeat last signal (trust factor)
+      if (lastSignal && Math.random() < 0.2) {
+        signal = lastSignal;
+      }
+
+      lastSignal = signal;
+      document.getElementById("signalBox").innerText = signal.toFixed(2) + "x";
+
+      // restart 10s timer
+      let t = 10;
+      const timerDiv = document.getElementById("timer");
+      timerDiv.innerText = t + "s";
+      const interval = setInterval(() => {
+        t -= 1;
+        timerDiv.innerText = t + "s";
+        if (t <= 0) clearInterval(interval);
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
