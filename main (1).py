@@ -3,7 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppI
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8074365909:AAGk3CyEJQXZVeiRqPw2U-d6sYix1buwYuA")
-WEBAPP_URL = "https://your-app-name.onrender.com/static/chicken.html"
+WEBAPP_URL = "https://chicken-road-bot.onrender.com/static/chicken.html"
 ADMIN_USERNAME = "@CLOWNMODS"
 UNLOCK_CODE = "chicken is hacked"
 
